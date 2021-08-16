@@ -1,0 +1,23 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS hstore;
+
+-- as postgres user
+CREATE ROLE conduktor LOGIN
+    PASSWORD 'hJSfHL68b3uMWaWp5wX5'
+    INHERIT CREATEDB CREATEROLE NOREPLICATION;
+
+CREATE DATABASE conduktor
+    WITH OWNER = conduktor
+    ENCODING = 'UTF8'
+    TABLESPACE = pg_default
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    TEMPLATE template0
+    CONNECTION LIMIT = -1;
+
+\c conduktor;
+CREATE SCHEMA backend AUTHORIZATION conduktor;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS hstore;
+ALTER EXTENSION "uuid-ossp" SET SCHEMA backend;
+ALTER EXTENSION hstore SET SCHEMA backend;
